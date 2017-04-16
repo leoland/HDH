@@ -1,0 +1,110 @@
+
+.single-product_type {
+
+  section.category-info {
+    margin-bottom:10px;
+    padding-top:80px;
+    width: 100%;
+    float: left;
+    .type-title {
+      @include col-size(4);
+      h1 {
+        margin-top:-.25em;
+        font-size: 45px;
+        @media (max-width: $bp__medium){
+          font-size:36px;
+        }
+        font-family: $font__light;
+        font-weight: lighter;
+        @include compress();
+        width: 111.11111%;
+      }
+    }
+    .category-description {
+      @include col-size(4);
+      p {
+        margin-top:-.25em;
+        font-size: 20px;
+        font-family: $font__light;
+        font-weight: lighter;
+        line-height: 1.35;
+        @include compress();
+        width: 111.11111%;
+
+      }
+    }
+  }
+
+  .category-grid {
+    width: 100%;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        position: relative;
+        @media (max-width: $bp__medium)
+        {
+          @include col-size(2);
+          margin-bottom: 20px;
+        }
+        @include col-size(4);
+        margin: 0;
+        margin-bottom: 45px;
+        &:after {
+          content: none;
+          display: none;
+        }
+
+          &:nth-child(2n-1) {
+            border-right: solid 1px $color__hd_grey_25;
+          }
+
+        a {
+          padding: 0;
+        }
+        p {
+          font-family: $font__light;
+          font-size: 15px;
+          line-height: 1.4;
+          font-weight: lighter;
+          color: $color__hd_grey_55;
+          margin:0;
+        }
+        h3 {
+          transition: all .3s;
+          font-family: $font__light;
+          font-size: 15px;
+          line-height: 1.4;
+          font-weight: lighter;
+          margin:20px 0 0;
+        }
+        img {
+          display: block;
+        }
+        &:hover {
+          h3 {
+            color: $color__hd_orange;
+          }
+          .img-wrapper {
+            &:before {
+              opacity: 1;
+            }
+          }
+
+        }
+        &:last-child{
+          margin-bottom:80px;
+          @media (max-width: $bp__medium){
+
+            margin-bottom:60px;
+          }
+        }
+      }
+
+    }
+
+  }
+
+}
+
+a:hover img-wrapper{}

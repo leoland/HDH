@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="simplehistory2– asimplelightweightextendableloggerforwordpress">Simple History 2 – a simple, lightweight, extendable logger for WordPress</h1>
+
+<p>Simple History is a WordPress plugin that logs various things that occur in WordPress and then presents those events in a very nice GUI.</p>
+
+<p>Download from WordPress.org:<br/>
+https://wordpress.org/plugins/simple-history/</p>
+
+<p><a href="https://travis-ci.org/bonny/WordPress-Simple-History"><img src="https://travis-ci.org/bonny/WordPress-Simple-History.svg?branch=master" alt="Build Status" /></a>
+<img src="https://img.shields.io/wordpress/plugin/r/simple-history.svg" alt="Rating at wordpress.org" />
+<img src="https://img.shields.io/wordpress/plugin/dt/simple-history.svg" alt="Number of downloads" /></p>
+
+<h1 id="screenshots">Screenshots</h1>
+
+<h2 id="viewinghistoryevents">Viewing history events</h2>
+
+<p>This screenshot show the log view + it also shows the filter function in use: the log only shows event that
+are of type post and pages and media (i.e. images &amp; other uploads), and only events
+initiated by a specific user.</p>
+
+<figure>
+<img src="https://ps.w.org/simple-history/assets/screenshot-1.png?rev=1" alt="Simple History screenshot" />
+<figcaption>Simple History screenshot</figcaption>
+</figure>
+
+<h2 id="eventswithdifferentseverity">Events with different severity</h2>
+
+<p>Simple History uses the log levels specified in the <a href="http://www.php-fig.org/psr/psr-3/">PHP PSR&#8211;3 standard</a>.</p>
+
+<figure>
+<img src="https://ps.w.org/simple-history/assets/screenshot-2.png?rev=1096689" alt="Simple History screenshot" />
+<figcaption>Simple History screenshot</figcaption>
+</figure>
+
+<h2 id="eventshavecontextwithextradetails">Events have context with extra details</h2>
+
+<p>Each logged event can include useful rich formatted extra information. For example: a plugin install can contain author info and a the url to the plugin, and an uploaded image can contain a thumbnail of the image.</p>
+
+<figure>
+<img src="http://ps.w.org/simple-history/assets/screenshot-3.png?rev=1096689" alt="Simple History screenshot" />
+<figcaption>Simple History screenshot</figcaption>
+</figure>
+
+<h1 id="pluginapi">Plugin API</h1>
+
+<p>Developers can easily log their own things using a simple API:</p>
+
+<pre><code class="php">&lt;?php
+// Add events to the log
+SimpleLogger()-&gt;info(&quot;This is a message sent to the log&quot;);
+
+// Add events of different severity
+SimpleLogger()-&gt;info(&quot;User admin edited page 'About our company'&quot;);
+SimpleLogger()-&gt;warning(&quot;User 'Jessie' deleted user 'Kim'&quot;);
+SimpleLogger()-&gt;debug(&quot;Ok, cron job is running!&quot;);
+
+</code></pre>
+
+<p>You will find more examples in the <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/examples.php">examples.php</a> file.</p>
+
+</body>
+</html>

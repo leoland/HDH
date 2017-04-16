@@ -1,0 +1,1 @@
+document.getElementById("slick-slide00").innerHTML="newtext";

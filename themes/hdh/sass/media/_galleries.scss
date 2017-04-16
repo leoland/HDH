@@ -1,0 +1,246 @@
+.gallery {
+  margin-bottom: 1.5em;
+}
+
+.gallery-item {
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  width: 100%;
+
+  .gallery-columns-2 & {
+    max-width: 50%;
+  }
+
+  .gallery-columns-3 & {
+    max-width: 33.33%;
+  }
+
+  .gallery-columns-4 & {
+    max-width: 25%;
+  }
+
+  .gallery-columns-5 & {
+    max-width: 20%;
+  }
+
+  .gallery-columns-6 & {
+    max-width: 16.66%;
+  }
+
+  .gallery-columns-7 & {
+    max-width: 14.28%;
+  }
+
+  .gallery-columns-8 & {
+    max-width: 12.5%;
+  }
+
+  .gallery-columns-9 & {
+    max-width: 11.11%;
+  }
+}
+
+.gallery-caption {
+  display: block;
+}
+
+.featherlight.featherlight.featherlight {
+  &:last-of-type {
+    background: rgba(0, 0, 0, .88);
+  }
+  .featherlight-content {
+    background: transparent;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    max-width: 1230px;
+    .featherlight-inner {
+      position: relative;
+      width: 100%;
+
+      max-width: 870px;
+      margin: 0 auto;
+      padding: 0;
+    }
+  }
+  img {
+    display: block;
+    width: auto;
+    border-radius: 0;
+    margin: 0 auto;
+    max-width: 870px;
+  }
+  .project-title, p {
+    display: block;
+    width: 100%;
+
+    max-width: 870px;
+    margin: 0 auto;
+  }
+  p a {
+    border-bottom: solid 1px;
+  }
+  .featherlight-close-icon {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    right: 50px;
+    line-height: 36px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    background: black;
+    color: transparent;
+    background-image: url(images/close-button.png);
+    background-position: center center;
+    &:hover {
+      background-image: url(images/close-button-hover.png);
+    }
+  }
+  .featherlight-next, .featherlight-previous {
+    display: block;
+    position: absolute;
+    top: 36px;
+    bottom: 63px;
+    width: 25%;
+    cursor: pointer;
+    opacity: 1;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: transparent;
+
+    background-repeat: no-repeat;
+    span {
+      display: none;
+    }
+  }
+  .featherlight-previous {
+    right: auto;
+    left: 50px;
+
+    background-image: url(images/gallery-prev.png);
+    background-position: center left;
+    &:hover {
+      background-image: url(images/gallery-prev-hover.png);
+    }
+  }
+  .featherlight-next {
+    left: auto;
+    right: 50px;
+    background-image: url(images/gallery-next.png);
+    background-position: center right;
+    &:hover {
+      background-image: url(images/gallery-next-hover.png);
+    }
+  }
+  @media (max-width: 950px){
+    .featherlight-close-icon,   .featherlight-next  {
+    right: 20px;
+    }
+    .featherlight-previous {
+      left:20px;
+    }
+    .featherlight-content .featherlight-inner {
+      max-width:100%;
+      padding:0 65px;
+    }
+    img {
+      max-width:100%;
+    }
+    }
+  }
+
+
+.page-template-page_roller_shades_fr, .single-product_line {
+  .featherlight.featherlight.featherlight {
+    .featherlight-content {
+      .featherlight-inner {
+        @include grid-pad();
+        width: 100%;
+        max-width: 100%;
+
+        img {
+          border-radius: 50%;
+          max-width:100%;
+          padding:0 50px;
+          @media (max-width: $bp__medium) and (min-width: 600px) {
+            @include col-size(2);
+            @include push(1);
+          }
+          @media (min-width: $bp__medium) {
+            @include col-size(4);
+            @include push(1);
+          }
+        }
+        .fabric-fr__lightbox-titles, .swatch-titles{
+
+          @include col-size(4);
+          @media (min-width: $bp__medium) {
+
+            @include col-size(3);
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+          }
+          h2, p {
+            color:  white;
+            font-family: $font__light;
+            font-weight:lighter;
+            line-height:2;
+            padding:0;
+            margin:0;
+          }
+          h2{
+            font-size:15px;
+          }
+          p{
+            font-size:42px;
+            @include compress();
+            margin-left:-2px;
+            line-height:1;
+          }
+        }
+        .fabric-fr__details{
+          @include col-size(4);
+          @media (min-width: $bp__medium) {
+            @include col-size(3);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          }
+          .opennesses, .max-width-wrapper {
+            margin-right:0;
+            width:100%;
+            max-width:210px;
+            display: block;
+            float:left;
+            clear: both;
+          }
+          .opennesses h3, .openness, .max-width-wrapper h3, .max-width, .max-width-wrapper {
+            color: white;
+          }
+          .specs-link a {
+            color: white;
+            &:hover {
+              color: $color__hd_orange;
+            }
+          }
+        }
+        .swatch-fabric {
+          color: white;
+        }
+      }
+    }
+  }
+}
+

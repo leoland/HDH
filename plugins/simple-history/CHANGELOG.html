@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="changelogfor2015anearlier">Changelog for 2015 an earlier</h1>
+
+<p>= 2.5 (December 2015) =</p>
+
+<ul>
+<li>Added: Category edits are now logged, so now you can see terms, categories and taxonomies that are added, changed, and deleted. Fixes for example https://wordpress.org/support/topic/view-changes-to-categories and https://twitter.com/hmarafi/status/655994402037362688.</li>
+<li>Fixed: The media logger now shows the width and height of uploaded images again.</li>
+<li>Fixed: IP Lookup using ipinfo.io would fail if your site was using HTTPS (pro account on ipinfo.io required for that), so now falls back to opening a link to ipinfo.io in a new tab instead.</li>
+<li>Fixed: If there was a server error while loading the log, the error would be shown, to help you debug any errors. The error would however not go away if you successfully loaded the log again. Now it does.</li>
+<li>Changed: The search/filter now falls back to showing events for the last 14 days, if 30 days would return over 1000 pages of events. This change is to try to make the log fail to load in less scenarios. If a site got a bit spike if brute force attacks (yes, it&#8217;s always those attacks!) then there could be a big jump in the number of events and pages between 14 days and 30 days.</li>
+<li>Changed: Failed login attempts now use shorter messages and shorter variable names. Not really the fault of this plugin, but sites can get a huge amount of failed login attempts logged. Sites with almost 2 million logged rows just in the last 60 days for example. And that will cause the database tables with the history to grow to several hundreds of megabyte. So to make those tables a bit smaller the plugin now uses shorter messages for failed login attempts, shorter variable names, and it stores less data. If you want to stop hackers from attacking your site (resulting in big history logs) you should install a plugin like <a href="https://jetpack.me/support/security-features/">Jetpack and its BruteProtect module</a>.</li>
+<li>Updated: Added date filter to show just events from just one day. Useful for sites that get hammered by brute force login attempts. On one site where I had 166434 login attempts the last 7 days this helped to make the log actually load :/.</li>
+<li>Updated: New French translation</li>
+</ul>
+
+<p>= 2.4 (November 2015) =</p>
+
+<ul>
+<li>Added: Now logs when a user changes their password using the &#8220;reset password&#8221; link.</li>
+<li>Added: Now logs when a user uses the password reset form.</li>
+<li>Added: New method <code>register_dropin</code> that can be used to add dropins.</li>
+<li>Added: New action <code>simple_history/add_custom_dropin</code>.</li>
+<li>Added: Example on how to add an external dropin: <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/example-dropin.php">example-dropin.php</a>.</li>
+<li>Added: &#8220;Last day&#8221; added to filter, because a brute force attack can add so many logs that it&#8217;s not possible to fetch a whole week.</li>
+<li>Changed: Filter <code>simple_history/log/do_log</code> now pass 5 arguments instead of 3. Before this update in was not possible for multiple add_action()-calls to use this filter, because you would not now if any other code had canceled it and so on. If you have been using this filter you need to modify your code.</li>
+<li>Changed: When hovering the time of an event in the log, the date of the event displays in both local time and GMT time. Hopefully makes it easier for admins in different timezones that work together on a site to understand when each event happened. Fixes https://github.com/bonny/WordPress-Simple-History/issues/84.</li>
+<li>Fixed: Line height was a bit tight on the dashboard. Also: the margin was a tad to small for the first logged event on the dashboard.</li>
+<li>Fixed: Username was not added correctly to failed login attempts when using plugin Captcha on Login + it would still show that a user logged out sometimes when a bot/script brute force attacked a site by only sending login and password and not the captcha field.</li>
+</ul>
+
+<p>= 2.3.1 (October 2015) =</p>
+
+<ul>
+<li>Fixed: Hopefully fixed the wrong relative time, as reported here: https://wordpress.org/support/topic/wrong-reporting-time.</li>
+<li>Changed: The RSS-feed with updates is now disabled by default for new installs. It is password protected, but some users felt that is should be optional to activate it. And now it is! Thanks to https://github.com/guillaumemolter for adding this feature.</li>
+<li>Fixed: Failed login entries when using plugin <a href="https://wordpress.org/plugins/captcha-on-login/">Captcha on Login</a> was reported as &#8220;Logged out&#8221; when they really meant &#8220;Failed to log in&#8221;. Please note that this was nothing that Simple History did wrong, it was rather Captcha on Login that manually called <code>wp_logout()</code> each time a user failed to login. Should fix all those mystery &#8220;Logged out&#8221;-entried some of you users had.</li>
+<li>Added: Filter <code>simple_history/log/do_log</code> that can be used to shortcut the log()-method.</li>
+<li>Updated: German translation updated.</li>
+</ul>
+
+<p>= 2.3 (October 2015) =</p>
+
+<ul>
+<li>Added: The title of the browser tab with Simple History open will now show the number of new and unread events available. Nice feature to have if you keep a tab with the Simple History log open but in the background: now you can see directly in the title if new events are available. Such small change. Very much nice.</li>
+<li>Added: If the AJAX call to fetch the log failed, a message now appears telling the user that something went wrong. Also, the output from the server is displayed so they can get a hint of what&#8217;s going wrong. Hopefully this will reduce the number of support requests that is caused by other plugins.</li>
+<li>Fixed: Edited posts/pages/custom post types does not get a linked title unless the user viewing the log has edit rights.</li>
+<li>Fixed: Another try to fix the notice error here: https://wordpress.org/support/topic/simplehistoryphp-creates-debug-entries.</li>
+<li>Updated: Danish translation updated.</li>
+<li>Updated: POT file updated.</li>
+</ul>
+
+<p>= 2.2.4 (September 2015) =</p>
+
+<ul>
+<li>Added: Basic support for plugin <a href="https://wordpress.org/plugins/ultimate-member/">Ultimate Member</a>, so users logging in using the plugin will now be logged in Simple History. Fixes https://wordpress.org/support/topic/compatibility-with-ultimate-member.</li>
+<li>Added: Filter <code>simple_history/logger/interpolate/context</code> that can be used to modify the variables sent to the message template.</li>
+<li>Changed: Remove &#8220;type&#8221; key from context detail table, because it&#8217;s an old an unused column.</li>
+<li>Changed: During a first install the plugin now creates a few less columns than before (some columns where left from version 1 of the plugin).</li>
+<li>Changed: Don&#8217;t show the &#8220;translate this plugin&#8221; metabox for any english talking locale.</li>
+<li>Changed: Don&#8217;t show the GitHub metabox.</li>
+<li>Fixed: If the plugin is deleted (but why?!) then the context table is also removed now.</li>
+<li>Behind the scenes: More unit tests! Hopefully more nasty things will get caught before releasing new versions of the plugin.</li>
+</ul>
+
+<p>= 2.2.3 (September 2015) =</p>
+
+<ul>
+<li>Fixed: On new installs the database tables was not created correctly and new events could not be logged.</li>
+</ul>
+
+<p>= 2.2.2 (September 2015) =</p>
+
+<ul>
+<li>Fixed: Logging stopped working for languages other then English. Sorry about that!</li>
+<li>Fixed: When running unit tests for a site where Simple History is a must use plugin it sometimes tried to create tables and add columns more then once. Now uses <code>if not exists</code> and similar to only try to create the tables if they not already exists.</li>
+</ul>
+
+<p>= 2.2.1 (September 2015) =</p>
+
+<ul>
+<li>Fixed: Missed to log users switching back on using the User Switching plugin. Fixes https://github.com/bonny/WordPress-Simple-History/issues/89.</li>
+</ul>
+
+<p>= 2.2 (September 2015) =</p>
+
+<ul>
+<li>Added: Support for plugin <a href="https://wordpress.org/plugins/user-switching/">User Switching</a>. The event log will show when a user switched to another user, when they switched back, or when they switched off.</li>
+<li>Added: Support for plugin <a href="https://wordpress.org/plugins/enable-media-replace/">Enable Media Replace</a>. Whenever a user replaces an attachment with a new, you will now know about it and also see the name of both the old and the new attachment. Awesome!</li>
+<li>Fixed: Mouse over (:hover state) on buttons no longer use blue background. Now works much better with admin themes other than the standard one. Fixes https://wordpress.org/support/topic/pagination-button-design.</li>
+</ul>
+
+<p>= 2.1.7 (September 2015) =</p>
+
+<ul>
+<li>Fixed: Date and time in the log was using GMT time rather than local time. Could be confusing. Even very confusing if living in a time zone far far away from the GMT zone.</li>
+</ul>
+
+<p>= 2.1.6 (August 2015) =</p>
+
+<ul>
+<li>Updated: Danish translation updated. Thanks translator!</li>
+<li>Fixed: Icon on settings page was a bit unaligned on WordPress not running the latest beta version (hrm, which I guess most of you were..)</li>
+<li>Fixed: Possible php notice. Should fix https://wordpress.org/support/topic/simplehistoryphp-creates-debug-entries.</li>
+<li>Changed: Logged messages are now trimmed by default (spaces and new lines will be removed from messages).</li>
+<li>Updated: When installing and activating the plugin it will now add the same &#8220;plugin installed&#8221; and &#8220;plugin activated&#8221; message that other plugins get when they are installed. These events where not logged before because the plugin was not installed and could therefor not log its own installation. Solution was to log it manually. Works. Looks good. But perhaps a bit of cheating.</li>
+<li>Added: A (hopefully) better welcome message when activating the plugin for the first time. Hopefully the new message makes new users understand a bit better why the log may be empty at first.</li>
+</ul>
+
+<p>= 2.1.5 (August 2015) =</p>
+
+<ul>
+<li>Fixed: It was not possible to modify the filters <code>simple_history/view_settings_capability</code> and <code>simple_history/view_history_capability</code> from the <code>functions.php</code>-file in a theme (filters where applied too early - they did however work from within a plugin!)</li>
+<li>Changed: Use <code>h1</code> instead of <code>h2</code> on admin screens. Reason for this the changes in 4.3: https://make.wordpress.org/core/2015/07/31/headings-in-admin-screens-change-in-wordpress&#8211;4&#8211;3/.</li>
+<li>Removed: the constant <code>VERSION</code> is now removed. Use constant <code>SIMPLE_HISTORY_VERSION</code> instead of you need to check the current version of Simple History.</li>
+</ul>
+
+<p>= 2.1.4 (July 2015) =</p>
+
+<ul>
+<li>Fixed: WordPress core updates got the wrong previous version.</li>
+<li>Updated: Updated German translations.</li>
+<li>Added: GHU header added to plugin header, to support <a href="https://github.com/afragen/github-updater">GitHub Updater plugin</a>.</li>
+</ul>
+
+<p>= 2.1.3 (July 2015) =</p>
+
+<ul>
+<li>Fixed: Ajax error when loading a log that contained uploaded images.</li>
+<li>Fixed: Removed some debug log messages.</li>
+</ul>
+
+<p>= 2.1.2 (July 2015) =</p>
+
+<ul>
+<li>Changed: By default the log now shows events from the last week, last two weeks or last 30 days, all depending on how many events you have in your log. The previous behavior was to not apply any filtering what so ever during the first load. Anyway: this change makes it possible to load the log very quickly even for very large logs. A large amount of users + keeping the log forver = millions of rows of data. Previously this could stall the log or make it load almost forever. Now = almost always very fast. I have tried it with over 5.000 users and a million row and yes - zing! - much faster. Fixes https://wordpress.org/support/topic/load-with-pagination-mysql.</li>
+<li>Added: Finnish translation. Thanks a lot to the translator!</li>
+<li>Updated: Swedish translation updated</li>
+<li>Added: Cache is used on a few more places.</li>
+<li>Added: Plugin now works as a <a href="https://codex.wordpress.org/Must_Use_Plugins">&#8220;must-use-plugin&#8221;</a>. Props <a href="https://github.com/jacquesletesson">jacquesletesson</a>.</li>
+<li>Added: Filter <code>SimpleHistoryFilterDropin/show_more_filters_on_load</code> that is used to control if the search options should be expanded by default when the history page is loaded. Default is false, to have a less cluttered GUI.</li>
+<li>Added: Filter <code>SimpleHistoryFilterDropin/filter_default_user_ids</code> that is used to search/filter specific user ids by default (no need to search and select users). Should fix https://wordpress.org/support/topic/how-to-pass-array-of-user-ids-to-history-query.</li>
+<li>Added: Filter <code>SimpleHistoryFilterDropin/filter_default_loglevel</code> that is used to search/filter for log levels by default.</li>
+<li>Fixed: if trying to log an array or an object the logger now automagically runs <code>json_encode()</code> on the value to make it a string. Previously is just tried to run `$wpdb-&gt;insert() with the array and that gave errors. Should fix https://wordpress.org/support/topic/mysql_real_escape_string.</li>
+<li>Fixed: The function that checks for new rows each second (or actually each tenth second to spare resources) was called an extra time each time the submit button for the filter was clicked. Kinda stupid. Kinda fixed now.</li>
+<li>Fixed: The export feature that was added in version 2.1 was actually not enabled for all users. Now it is!</li>
+<li>Fixed: Image attachments that is deleted from file system no longer result in &#8220;broken image&#8221; in the log. (Rare case, I know, but it does happen for me that local dev server and remote prod server gets out of &#8220;sync&#8221; when it comes to attachments.)</li>
+</ul>
+
+<p>= 2.1.1 (May 2015) =</p>
+
+<ul>
+<li>Removed: filter <code>simple_history/dropins_dir</code> removed.</li>
+<li>Changed: Dropins are not loaded from a <code>glob()</code> call anymore (just like plugins in the prev release)</li>
+<li>Updated: Brazilian Portuguese translation updated.</li>
+<li>Fixed: POT file updated for translators.</li>
+<li>Fixed: Better sanitization of API arguments.</li>
+</ul>
+
+<p>= 2.1 (May 2015) =</p>
+
+<ul>
+<li>Added: Export! Now it&#8217;s possible to export the events log to a JSON or CSV formatted file. It&#8217;s your data so you should be able to export it any time you want or need. And now you can do that. You will find the export function in the Simple History settings page (Settings -&gt; Simple History).</li>
+<li>Added: Filter <code>simple_history/add_custom_logger</code> and function <code>register_logger</code> that together are used to load external custom loggers. See <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/example-logger.php">example-logger.php</a> for usage example.</li>
+<li>Added: Filter <code>simple_history/header_initiator_use_you</code>.</li>
+<li>Fixed: Fixed an undefined variable in get_avatar(). Fixes https://github.com/bonny/WordPress-Simple-History/issues/74.</li>
+<li>Fixed: When using <a href="https://wordpress.org/support/plugin/hyperdb">HyperDB</a> only one event was returned. Fixed by using <a href="https://plugins.trac.wordpress.org/browser/hyperdb/trunk/db.php?#L49">adding <code>NO_SELECT_FOUND_ROWS</code> to the query</a>. Should fix problems for users using HyperDB and also users using for example <a href="http://wpengine.com">wpengine.com</a> (that probably also is using HyperDB or a similar approach).</li>
+<li>Changed: Loggers now get default capability &#8220;manage_options&#8221; if they have no capability set.</li>
+<li>Changed: Misc internal cleanup.</li>
+<li>Removed: filter <code>simple_history/loggers_dir</code> removed, because loggers are loaded from array instead of file listing generated from <code>glob()</code>. Should be (however to the eye non-noticable) faster.</li>
+</ul>
+
+<p>= 2.0.30 (May 2015) =</p>
+
+<ul>
+<li>Added: Username of logged events now link to that user&#8217;s profile.</li>
+<li>Fixed: When expanding ocassions the first loaded occasion was the same event as the one you expanded from, and the last ocassion was missing. Looked extra stupid when only 1 occasion existed, and you clicked &#8220;show ocassions&#8221; only to just find the same event again. So stupid. But fixed now!</li>
+<li>Fixed: If an event had many similar events the list of similar events could freeze the browser. (<a href="https://twitter.com/eskapism/status/595478847598002176">17948 failed login attempts overnight</a> is not that uncommon it turns out!)</li>
+<li>Fixed: Some loggers were missing the &#8220;All&#8221;-message in the search.</li>
+<li>Changed: Hide some more keys and values by default in the context data popup.</li>
+<li>Changed: Use <code>truncate</code> instead of <code>delete</code> when clearing the database. Works much faster on large logs.</li>
+</ul>
+
+<p>= 2.0.29 (April 2015) =</p>
+
+<ul>
+<li>Added: Introducing <a href="http://eskapism.se/blog/2015/04/quick-diff-shows-post-changes-in-wordpress/">Post &#8220;Quick Diff&#8221;</a> – a very simple and efficient way to quickly see what’s been changed in a post. With Quick Diff you will in a glance see the difference between the title, permalink, content, publish date, post status, post author, or the template of the post. It&#8217;s really a super simple and fast way to follow the work of your co-editors.</li>
+<li>Added: Filter to add custom HTML above and after the context data table. They are named <code>simple_history/log_html_output_details_single/html_before_context_table</code> and <code>simple_history/log_html_output_details_single/html_after_context_table</code> (and yes, I do fancy really long filter names).</li>
+<li>Added: Filters to control what to output in the data/context details table (the popup you see when you click the time of each event): <code>simple_history/log_html_output_details_table/row_keys_to_show</code> and <code>simple_history/log_html_output_details_table/context_keys_to_show</code>. Also added <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/examples.php">two usage examples</a> for the filters.</li>
+<li>Added: Filter <code>simple_history/log_insert_context</code> to control what gets saved to the context table. Example on usage for this is also available in the <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/examples.php">example file</a>.</li>
+<li>Added: data attribute <code>data-ip-address-multiple</code> and class <code>SimpleHistoryLogitem--IPAddress-multiple</code> added for events that have more than one IP address detected. Happens when <code>http_x_forwarded_for</code> or similar headers are included in response.</li>
+<li>Updated: Danish translation updated.</li>
+<li>Fixed: Images in GitHub readme files are now displayed correctly.</li>
+<li>Fixed: Readme files to GitHub repositories ending with slash (/) now works correctly too.</li>
+<li>Fixed: IP Info popup is now again closeable with <code>ESC</code> key or with a click outside it.</li>
+<li>Fixed: Some enqueued scripts had double slashes in them.</li>
+<li>Fixed: Make sure <a href="https://make.wordpress.org/plugins/2015/04/20/fixing-add_query_arg-and-remove_query_arg-usage/">URLs from add_query_arg() gets escaped</a>.</li>
+<li>Fixed: Some other small things.</li>
+</ul>
+
+<p>= 2.0.28 (April 2015) =</p>
+
+<ul>
+<li>Fixed: Do not try to load the Translation Install API if using WordPress before 4.0. Fixes https://github.com/bonny/WordPress-Simple-History/issues/67.</li>
+<li>Updated: German translation updated.</li>
+</ul>
+
+<p>= 2.0.27 (April 2015) =</p>
+
+<ul>
+<li>Fixed: Even better support for plugins from GitHub with the <code>GitHub Plugin URI</code> header. Plugin install, deactivations, and activations should have correct view-info-links now.</li>
+<li>Updated: German translation updated.</li>
+<li>Updated: Swedish translation updated.</li>
+</ul>
+
+<p>= 2.0.26 (March 2015) =</p>
+
+<ul>
+<li>Fixed: Plugin installs from wordpress.org would show &#8220;wordpress plugin directory&#8221; as their source file. Looked stupid. Fixed now!</li>
+<li>Added: <code>composer.json</code> added, so Simple History can be pulled in to other projects via <a href="https://getcomposer.org/">Composer</a>. Actually untested, but at least the file is there. Please let me know if it works! :)</li>
+</ul>
+
+<p>= 2.0.25 (March 2015) =</p>
+
+<ul>
+<li>Added: Plugin installs now shows the source of the plugin. Supported sources are &#8220;WordPress plugin repository&#8221; and &#8220;uploaded ZIP archives&#8221;.</li>
+<li>Added: Plugin installs via upload now shows the uploaded file name.</li>
+<li>Added: Support for showing plugin info-link for plugins from GitHub, installed with uploaded ZIP-archive. Only tested with a few plugins. Please let me know if it works or not!</li>
+<li>Fixed: Messages for disabled loggers was not shown.</li>
+<li>Fixed: An error when trying to show edit link for deleted comments.</li>
+<li>Fixed: Use a safer way to get editable roles. Hopefully fixes https://wordpress.org/support/topic/php-warnings-simpleloggerphp-on-line&#8211;162.</li>
+<li>Fixed: Some notice warnings from the comments logger.</li>
+<li>Changed: Some other small things too.</li>
+</ul>
+
+<p>= 2.0.24 (March 2015) =</p>
+
+<ul>
+<li>Fixed: Plugin installs from uploaded ZIP files are now logged correctly. Fixes https://github.com/bonny/WordPress-Simple-History/issues/59.</li>
+<li>Fixed: Check that JavaScript variables it set and that the object have properties set. Fixes https://wordpress.org/support/topic/firefox&#8211;37-js-error-generated-by-simplehistoryipinfodropinjs.</li>
+<li>Updated: German translation updated.</li>
+<li>Changed: Loading of loggers, dropins, and so one are moved from action <code>plugins_loaded</code> to <code>after_setup_theme</code> so themes can actually use for example the load_dropin_*-filters&#8230;</li>
+<li>Changed: Misc small design fixes.</li>
+</ul>
+
+<p>= 2.0.23 (March 2015) =</p>
+
+<ul>
+<li>Added: Filter <code>simple_history/rss_item_link</code>, so plugins can modify the link used in the RSS feed.</li>
+<li>Added: Links for changed posts and attachments in RSS feed now links directly to WordPress admin, making is easier to follow things from your RSS reeder.</li>
+<li>Added: Filters to hide history dashboard widget and history dashboard page. Filters are <code>simple_history/show_dashboard_widget</code> and <code>simple_history/show_dashboard_page</code>.</li>
+<li>Fixed: A missing argument error when deleting a plugin. Fixes https://wordpress.org/support/topic/warning-missing-argument&#8211;1-for-simplepluginlogger.</li>
+</ul>
+
+<p>= 2.0.22 (February 2015) =</p>
+
+<ul>
+<li>Fixed: Deleted plugins were not logged correctly (name and other info was missing).</li>
+<li>Added: Filter <code>simple_history/logger/load_logger</code> and <code>simple_history/dropin/load_dropin</code> that can be used to control the loading of each logger or dropin. See <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/examples.php">example file</a> for usage examples.</li>
+<li>Fixed: modal window with context data now works better on small screens.</li>
+<li>Changed: Misc internal changes.</li>
+</ul>
+
+<p>= 2.0.21 (February 2015) =</p>
+
+<ul>
+<li>Added: Updates via XML RPC are now logged, for example when using the WordPress app for iOS or Android. Supported actions for now is post/page created, edited, deleted, and media uploads.</li>
+<li>Added: <code>_xmlrpc_request</code> is added to context of event when an event is initiated through a XML-RPC all.</li>
+<li>Changed: RSS feed now has loglevel of event prepended to the title.</li>
+<li>Changed: Options logger now only shows the first 250 chars of new and old option values. Really long values could make the log look strange.</li>
+<li>Added: If constant <code>SIMPLE_HISTORY_LOG_DEBUG</code> is defined and true automatically adds <code>$_GET</code>, <code>$_POST</code>, and more info to each logged event. Mostly useful for the developer, but maybe some of you are a bit paranoid and want it too.</li>
+<li>Updated: German translation updated.</li>
+</ul>
+
+<p>= 2.0.20 (February 2015) =</p>
+
+<ul>
+<li>Added: changes via <a href="http://wp-cli.org">WP-CLI</a> is now detected (was previously shown as &#8220;other&#8221;).</li>
+<li>Added: severity level (info, warning, debug, etc.) of event is includes in the RSS output.</li>
+<li>Changed the way user login is logged. Should fix https://github.com/bonny/WordPress-Simple-History/issues/40 + possible more related issues.</li>
+<li>Added: filter <code>simple_history/simple_logger/log_message_key</code> added, that can be used to shortcut log messages. See <a href="https://github.com/bonny/WordPress-Simple-History/blob/master/examples/examples.php">example file</a> for usage. Fixes https://wordpress.org/support/topic/stop-logging-certain-types-of-activity.</li>
+<li>Added: now uses object caching at some places. Should speed up some parts of the plugin for users with caching enabled.</li>
+<li>Fixed: IP info popup can now be closed with <code>esc</code>.</li>
+<li>Fixed: works better on small screens (like mobile phones) + misc other style related fixes.</li>
+</ul>
+
+<p>= 2.0.19 (February 2015) =</p>
+
+<ul>
+<li>Added: Dutch translation by <a href="https://github.com/niknetniko">https://github.com/niknetniko</a>. Thanks!</li>
+<li>Changed: better compatibilty with plugins like <a href="https://wordpress.org/plugins/wp-user-avatar/">WP User Avatar</a>.</li>
+<li>Updated: German translation update.</li>
+</ul>
+
+<p>= 2.0.18 (January 2015) =</p>
+
+<ul>
+<li>Fixed: really correctly show the version number of the previous version!</li>
+</ul>
+
+<p>= 2.0.17 (January 2015) =</p>
+
+<ul>
+<li>Added: messages added using for example <code>SimpleLogger()-&gt;info( __(&quot;My log message&quot;) )</code> that have translations now auto translated the message back to english before storing the message (together with the text domain). Then upon retrieval it uses the english message + the text domain to translate the message to the currently selected language. This makes it easier to make multilingual log entries. (Yeah, I know its hard to understand what the heck this does, but it&#8217;s something good and cool, trust me!)</li>
+<li>Added: A sidebar with text contents on the history page.</li>
+<li>Changed: Search now shows only the search box by default, with a link to show all search options.</li>
+<li>Fixed: Search is now available at the dashboard again. Hooray!</li>
+<li>Fixed: Old entries were not cleared automatically. Now it correctly removes old events, so your database will not risk growing to large.</li>
+<li>Fixed: Quick stats could show two messages sometimes.</li>
+<li>Fixed: When headers like <code>HTTP_X_FORWARDED_FOR</code> exists all valid IPs in that header is now stored.</li>
+<li>Fixed: Plugin updates via third party software like <a href="http://infinitewp.com/">InfiniteWP</a> should now correctly show the version number of the previous version.</li>
+<li>Updated: German translation updated.</li>
+<li>Notice: Do you read these messages? Then you must love this plugin! Come on then, <a href="https://wordpress.org/support/view/plugin-reviews/simple-history">go and give it a nice review</a>.</li>
+</ul>
+
+<p>= 2.0.16 (January 2015) =</p>
+
+<ul>
+<li>Fixed: Use the <a href="http://en.wikipedia.org/wiki/X-Forwarded-For">X-Forwarded-For header</a>, if it is set, to determine remote IP address. Should now correctly store IP addresses for servers behind load balancers or for clients going through proxies. Fixes https://wordpress.org/support/topic/use-x-forwarded-for-http-header-when-logging-remote_addr.</li>
+<li>Changed: Failed login attempts from unknown and known users are now grouped together. This change was made because a hacker could make many login attempts to a site and rotate the logins, so they would try with both existing and non existing user names, which would make the log flood with failed login attempts.</li>
+<li>Changed: use &#8220;n similar events&#8221; instead of &#8220;n more&#8221;, to more cleary mark that the grouped events are not necessary exactly the same kind.</li>
+<li>Changed: Quick stats text changed, to also include other sources. Previous behavior was to only include events from WordPress users, but now also events from anonymous users and WordPress (like from WP-Cron) are included.</li>
+</ul>
+
+<p>= 2.0.15 (January 2015) =</p>
+
+<ul>
+<li>Fixed: Widget changes where not always translated.</li>
+<li>Fixed: More RSS fixes to make feed valid. Maybe even for real this time.</li>
+<li>Updated: German translation updated.</li>
+</ul>
+
+<p>= 2.0.14 (January 2015) =</p>
+
+<ul>
+<li>Added: Danish translation added. Thanks <a href="https://github.com/ThomasDK81">ThomasDK81</a>!</li>
+<li>Misc translation fixes, for example the log levels where not translateable (it may be a good idea to keep the original English ones however because they are the ones that are common in other software).</li>
+</ul>
+
+<p>= 2.0.13 (January 2015) =</p>
+
+<ul>
+<li>Fixed: RSS feed is now valid according to http://validator.w3.org/. Fixes https://wordpress.org/support/topic/a-feed-which-was-valid-under-v206-is-no-longer-under-v209-latest.</li>
+<li>Translation fixes. Thanks <a href="https://github.com/ThomasDK81">ThomasDK81</a>!</li>
+</ul>
+
+<p>= 2.0.12 (January 2015) =</p>
+
+<ul>
+<li>Fixed: Deleted attachments did not get translations.</li>
+<li>Fixed: A notice when showing details for a deleted attachment.</li>
+</ul>
+
+<p>= 2.0.11 (January 2015) =</p>
+
+<ul>
+<li>Fixed: Comments where not logged correctly.</li>
+<li>Fixed: Comments where not translated correctly.</li>
+<li>Updated: German translation updated.</li>
+</ul>
+
+<p>= 2.0.10 (January 2015) =</p>
+
+<ul>
+<li>Updated: Polish translation updated. Thanks <a href="m-czardybon">https://github.com/m-czardybon</a>!</li>
+<li>Updated: German translation updated. Thanks <a href="Ralph">http://klein-aber-fein.de/</a>!</li>
+<li>Updated: Swedish translation updated.</li>
+</ul>
+
+<p>= 2.0.9 (December 2014) =</p>
+
+<ul>
+<li>Actually enable IP address lookup for all users. Sorry for missing to do that! ;)</li>
+</ul>
+
+<p>= 2.0.8 (December 2014) =</p>
+
+<ul>
+<li>Added: IP addresses can now be clicked to view IP address info from <a href="http://ipinfo.io">ipinfo.io</a>. This will get you the location and network of an IP address and help you determine from where for example a failed login attempt originates from. <a href="http://glui.me/?d=y89nbgmvmfnxl4r/ip%20address%20information%20popup.png/">See screenshot of IP address info in action</a>.</li>
+<li>Added: new action <code>simple_history/admin_footer</code>, to output HTML and JavaScript in footer on pages that belong to Simple History</li>
+<li>Added: new trigger for JavaScript: <code>SimpleHistory:logReloadStart</code>. Fired when the log starts to reload, like when using the pagination or using the filter function.</li>
+<li>Fixed: use Mustache-inspired template tags instead of Underscore default ones, because they don&#8217;t work with PHP with asp_tags on.</li>
+<li>Updated: Swedish translation updated</li>
+</ul>
+
+<p>= 2.0.7 (December 2014) =</p>
+
+<ul>
+<li>Fix: no message when restoring page from trash</li>
+<li>Fix: use correct width for media attachment</li>
+<li>Add: filter <code>simple_history/logrowhtmloutput/classes</code>, to modify HTML classes added to each log row item</li>
+</ul>
+
+<p>= 2.0.6 (November 2014) =</p>
+
+<ul>
+<li><p>Added: <a href="http://codex.wordpress.org/Version_4.1#Users">WordPress 4.1 added the feature to log out a user from all their sessions</a>. Simple History now logs when a user is logged out from all their sessions except the current browser, or if an admin destroys all sessions for a user. <a href="https://dl.dropboxusercontent.com/s/k4cmfmncekmfiib/2014-12-simple-history-changelog-user-sessions.png">View screenshot of new session logout log item</a></p></li>
+<li><p>Added: filter to shortcut loading of a dropin. Example that completely skips loading the RSS-feed-dropin:
+<code>add_filter(&quot;simple_history/dropin/load_dropin_SimpleHistoryRSSDropin&quot;, &quot;__return_false&quot;);</code></p></li>
+</ul>
+
+<p>= 2.0.5 (November 2014) =</p>
+
+<ul>
+<li>Fix undefined variable in plugin logger. Fixes https://wordpress.org/support/topic/simple-history&#8211;201-is-not-working?replies=8#post&#8211;6343684.</li>
+<li>Made the dashboard smaller</li>
+<li>Misc other small GUI changes</li>
+</ul>
+
+<p>= 2.0.4 (November 2014) =</p>
+
+<ul>
+<li>Make messages for manually updated plugins and bulk updated plugins more similar</li>
+</ul>
+
+<p>= 2.0.3 (November 2014) =</p>
+
+<ul>
+<li>Show the version of PHP that the user is running, when the PHP requirement of &gt;= 5.3 is not met</li>
+</ul>
+
+<p>= 2.0.2 (November 2014) =</p>
+
+<ul>
+<li>Fixed wrong number of arguments used in filter in RSS-feed</li>
+</ul>
+
+<p>= 2.0.1 (November 2014) =</p>
+
+<ul>
+<li>Removed anonymous function in index file causing errors during install on older versions of PHP</li>
+</ul>
+
+<p>= 2.0 (November 2014) =</p>
+
+<p>Major update - Simple History is now better and nicer than ever before! :)
+I&#8217;ve spend hundreds of hours making this update, so if you use it and like it please <a href="http://eskapism.se/sida/donate/">donate to keep my spirit up</a> or <a href="https://wordpress.org/support/view/plugin-reviews/simple-history">give it a nice review</a>.</p>
+
+<ul>
+<li>Code cleanup and modularization</li>
+<li>Support for log contexts</li>
+<li>Kinda PSR&#8211;3-compatible :)</li>
+<li>Can handle larger logs (doesn&#8217;t load whole log into memory any more)</li>
+<li>Use nonces at more places</li>
+<li>More filters and hooks to make it easier to customize</li>
+<li>Better looking! well, at least I think so ;)</li>
+<li>Much better logging system to make it much easier to create new loggers and to translate logs into different languages</li>
+<li>Features as plugins: more things are moved into modules/its own file</li>
+<li>Users see different logs depending on their capability, for example an administrator will see what plugins have been installed, but an editor will not see any plugin related logs</li>
+<li>Much much more.</li>
+</ul>
+
+<p>= 1.3.11 =
+- Don&#8217;t use deprecated function get_commentdata(). Fixes https://wordpress.org/support/topic/get_commentdata-function-is-deprecated.
+- Don&#8217;t use mysql_query() directly. Fixes https://wordpress.org/support/topic/deprecated-mysql-warning.
+- Beta testers wanted! I&#8217;m working on the next version of Simple History and now I need some beta testers. If you want to try out the shiny new and cool version please download the <a href="https://github.com/bonny/WordPress-Simple-History/tree/v2">v2 branch</a> over at GitHub. Thanks!</p>
+
+<p>= 1.3.10 =
+- Fix: correct usage of &#8220;its&#8221;
+- Fix: removed serif font in log. Fixes https://wordpress.org/support/topic/two-irritations-and-pleas-for-change.</p>
+
+<p>= 1.3.9 =
+- Fixed strict standards warning
+- Tested on WordPress 4.0</p>
+
+<p>= 1.3.8 =
+- Added filter for rss feed: <code>simple_history/rss_feed_show</code>. Fixes more things in this thread: http://wordpress.org/support/topic/more-rss-feed-items.</p>
+
+<p>= 1.3.7 =
+- Added filter for rss feed: <code>simple_history/rss_feed_args</code>. Fixes http://wordpress.org/support/topic/more-rss-feed-items.</p>
+
+<p>= 1.3.6 =
+- Added Polish translation
+- Added correct XML encoding and header
+- Fixed notice warnings when media did not exist on file system</p>
+
+<p>= 1.3.5 =
+- Added a reload-button at top. Click it to reload the history. No need to refresh page no more!
+- Fixed items being reloaded when just clicking the dropdown (not having selected anything yet)
+- Fixed bug with keyboard navigation
+- Added Portuguese translation by <a href="http://x6web.com">X6Web</a>
+- Use less SQL queries</p>
+
+<p>= 1.3.4 =
+- Changed the way post types show in the dropdown. Now uses plural names + not prefixed with main post type. Looks better I think. Thank to Hassan for the suggestion!
+- Added &#8220;bytes&#8221; to size units that an attachment can have. Also fixes undefined notice warning when attachment had a size less that 1 KB.</p>
+
+<p>= 1.3.3 =
+- Capability for viewing settings changed from edit_pages to the more correct <a href="http://codex.wordpress.org/Roles_and_Capabilities#manage_options">manage_options</a></p>
+
+<p>= 1.3.2 =
+- Could get php notice warning if rss secret was not set. Also: make sure both public and private secret exists.</p>
+
+<p>= 1.3.1 =
+- Improved contrast for details view
+- Fix sql error on installation due to missing column
+- Remove options and database table during removal of plugin
+- Added: German translation for extender module</p>
+
+<p>= 1.3 =
+- Added: history events can store text description with a more detailed explanation of the history item
+- Added: now logs failed login attempts for existing username. Uses the new text description to store more info, for example user agent and remote ip address (REMOTE_ADDR)
+- Fixed: box did not change height when clicking on occasions
+- Fixed: use on() instead of live() in JavaScript</p>
+
+<p>= 1.2 =
+- Fixed: Plugin name is included when plugins is activated or deactivated. Previosuly only folder name and name of php file was included.
+- Added: Attachment thumbnails are now visible if history item is an attachment. Also includes some metadata.
+- Changed: Filters now use dropdowns for type and user. When a site had lots of users and lots of post types, the filter section could be way to big.
+- Added keyboard navigation. Use right and left arrow when you are on Simple History&#8217;s own page to navigation between next and previous history page.
+- Added loading indicator, so you know it&#8217;s grabbing your history, even if it&#8217;s taking a while
+- Misc JS and CSS fixes
+- Arabic translation updated
+- POT-file updated</p>
+
+<p>= 1.1 =
+- Added the Simple History Extender-module/plugin. With this great addon to Simple History it is very easy for other developers to add their own actions to simple history, including a settings panel to check actions on/off. All work on this module was made by Laurens Offereins (lmoffereins@gmail.com). Super thanks!
+- With the help of Simple History Extender this plugin also tracks changes made in bbPress, Gravity Forms and in Widges. Awesome!
+- Added user email to RSS feed + some other small changed to make it compatible with IFTTT.com. Thanks to phoenixMagoo for the code changes. Fixes http://wordpress.org/support/topic/suggestions-a-couple-of-tweaks-to-the-rss-feed.
+- Added two filters for the RSS feed: simple_history_rss_item_title and simple_history_rss_item_description.
+- Changed the way the plugin directory was determined. Perhaps and hopefully this fixes some problems with multi site and plugin in different locations and stuff like that
+- Style fixes for RTL languages
+- Small fixes here and there, for example changing deprecated WordPress functions to not deprecated
+- Added new filter: simple_history_db_purge_days_interval. Hook it to change default clear interval of 60 days.</p>
+
+<p>= 1.0.9 =
+- Added French translation</p>
+
+<p>= 1.0.8 =
+- Added: filter simple_history_allow_db_purge that is used to determine if the history should be purged/cleaned after 60 days or not. Return false and it will never be cleaned.
+- Fixed: fixed a security issue with the RSS feed. User who should not be able to view the feed could get access to it. Please update to this version to keep your change log private!</p>
+
+<p>= 1.0.7 =
+- Fixed: Used a PHP shorthand opening tag at a place. Sorry!
+- Fixed: Now loads scripts and styles over HTTPS, if that&#8217;s being used. Thanks to &#8220;llch&#8221; for the patch.</p>
+
+<p>= 1.0.6 =
+- Added: option to set number of items to show, per page. Default i 5 history log items.</p>
+
+<p>= 1.0.5 =
+- Fixed: some translation issues, including updated POT-file for translators.</p>
+
+<p>= 1.0.4 =
+- You may want to clear the history database after this update because the items in the log will have mixed translate/untranslated status and it may look/work a bit strange.
+- Added: Option to clear the database of log items.
+- Changed: No longer stored translated history items in the log. This makes the history work even if/when you switch langauge of WordPress.
+- Fixed: if for example a post was editied several times and during these edits it changed name, it would end up at different occasions. Now it&#8217;s correctly stored as one event with several occasions.
+- Some more items are translateable</p>
+
+<p>= 1.0.3 =
+- Updated German translation
+- Some translation fixes</p>
+
+<p>= 1.0.2 =
+- Fixed a translation bug
+- Added updated German translation</p>
+
+<p>= 1.0.1 =
+- The pagination no longer disappear after clickin &#8220;occasions&#8221;
+- Fixed: AJAX loading of new history items didn&#8217;t work.
+- New filter: simple_history_view_history_capability. Default is &#8220;edit_pages&#8221;. Modify this to change what cabability is required to view the history.
+- Modified: styles and scripts are only added on pages that use/show Simple History
+- Updated: new POT file. So translators my want to update their translations&#8230;</p>
+
+<p>= 1.0 =
+- Added: pagination. Gives you more information, for example the number of items, and quicker access to older history items. Also looks more like the rest of the WordPress GUI.
+- Modified: search now searches type of action (added, modified, deleted, etc.).</p>
+
+<p>= 0.8.1 =
+- Fixed some annoying errors that slipt through testing.</p>
+
+<p>= 0.8 =
+- Added: now also logs when a user saves any of the built in settings page (general, writing, reading, discussion, media, privacy, and permalinks. What more things do you want to see in the history? Let me know in the <a href="http://wordpress.org/support/plugin/simple-history">support forum</a>.
+- Added: gravatar of user performing action is always shown
+- Fixed: history items that was posts/pages/custom post types now get linked again
+- Fixed: search is triggered on enter (no need to press search button) + search searches object type and object subtype (before it just searched object name)
+- Fixed: showing/loading of new history items was kinda broken. Hopefully fixed and working better than ever now.
+- Plus: even more WordPress-ish looking!
+- Also added donate-links. Tried to keep them discrete. Anyway: please <a href="http://eskapism.se/sida/donate/?utm_source=wordpress&amp;utm_medium=changelog&amp;utm_campaign=simplehistory">donate</a> if you use this plugin regularly.</p>
+
+<p>= 0.7.2 =
+- Default settings should be to show on page, missed that one. Sorry!</p>
+
+<p>= 0.7.1 =
+- Fixed a PHP shorttag</p>
+
+<p>= 0.7 =
+- Do not show on dashboard by default to avoid clutter. Can be enabled in settings.
+- Add link to settings from plugin list
+- Settings are now available as it&#8217;s own page under Settings -&gt; Simple Fields. It was previosly on the General settings page and some people had difficulties finding it there.
+- Added filters: simple_history_show_settings_page, simple_history_show_on_dashboard, simple_history_show_as_page</p>
+
+<p>= 0.6 =
+- Changed widget name to just &#8220;History&#8221; instead of &#8220;Simple History&#8221;. Keep it simple. Previous name implied there also was an &#8220;Advanced History&#8221; somewhere.
+- Made the widget look a bit WordPress-ish by borrwing some of the looks from the comments widget.
+- Fix for database that didn&#8217;t use UTF&#8211;8 (sorry international users!)
+- Some security fixes
+- Updated POT-file</p>
+
+<p>= 0.5 =
+- Added author to RSS
+- Added german translation, thanks http://www.fuerther-freiheit.info/
+- Added swedish translation, thanks http://jockegustin.se
+- Better support for translation</p>
+
+<p>= 0.4 =
+- Added: Now you can search the history
+- Added: Choose if you wan&#8217;t to load/show more than just 5 rows from the history</p>
+
+<p>= 0.3.11 =
+- Fixed: titles are now escaped</p>
+
+<p>= 0.3.10 =
+- Added chinese translation
+- Fixed a variable notice
+- More visible ok-message after setting a new RSS secret</p>
+
+<p>= 0.3.9 =
+- Attachment names were urlencoded and looked wierd. Now they&#8217;re not.
+- Started to store plugin version number</p>
+
+<p>= 0.3.8 =
+- Added chinese translation
+- Uses WordPress own human_time_diff() instead of own version
+- Fix for time zones</p>
+
+<p>= 0.3.7 =
+- Directly after installation of Simple History you could view the history RSS feed without using any secret. Now a secret is automatically set during installation.</p>
+
+<p>= 0.3.6 =
+- Made the RSS-feature a bit easier to find: added a RSS-icon to the dashboard window - it&#8217;s very discrete, you can find it at the bottom right corner. On the Simple History page it&#8217;s a bit more clear, at the bottom, with text and all. Enjoy!
+- Added POT-file</p>
+
+<p>= 0.3.5 =
+- using get_the_title instead of fetching the title directly from the post object. should make plugins like qtranslate work a bit better.
+- preparing for translation by using __() and _e() functions. POT-file will be available shortly.
+- Could get cryptic &#8220;simpleHistoryNoMoreItems&#8221;-text when loading a type with no items.</p>
+
+<p>= 0.3.4 =
+- RSS-feed is now valid, and should work at more places (could be broken because of html entities and stuff)</p>
+
+<p>= 0.3.3 =
+- Moved JavaScript to own file
+- Added comments to the history, so now you can see who approved a comment (or unapproved, or marked as spam, or moved to trash, or restored from the trash)</p>
+
+<p>= 0.3.2 =
+- fixed some php notice messages + some other small things I don&#8217;t remember..</p>
+
+<p>= 0.3.1 =
+- forgot to escape html for posts
+- reduced memory usage&#8230; I think/hope&#8230;
+- changes internal verbs for actions. some old history items may look a bit weird.
+- added RSS feed for recent changes - keep track of changes via your favorite RSS-reader</p>
+
+<p>= 0.3 =
+- page is now added under dashboard (was previously under tools). just feel better.
+- mouse over on date now display detailed date a bit faster
+- layout fixes to make it cooler, better, faster, stronger
+- multiple events of same type, performed on the same object, by the same user, are now grouped together. This way 30 edits on the same page does not end up with 30 rows in Simple History. Much better overview!
+- the name of deleted items now show up, instead of &#8220;Unknown name&#8221; or similar
+- added support for plugins (who activated/deactivated what plugin)
+- support for third party history items. Use like this:
+simple_history_add(&#8220;action=repaired&amp;object_type=starship&amp;object_name=USS Enterprise&#8221;);
+this would result in somehting like this:
+Starship &#8220;USS Enterprise&#8221; repaired
+by admin (John Doe), just now
+- capability edit_pages needed to show history. Is this an appropriate capability do you think?</p>
+
+<p>= 0.2 =
+* Compatible with 2.9.2</p>
+
+<p>= 0.1 =
+* First public version. It works!</p>
+
+</body>
+</html>

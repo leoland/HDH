@@ -1,0 +1,145 @@
+h1, h2, h3, h4, h5, h6 {
+  clear: both;
+  color: $color__hd_grey;
+}
+
+h1 {
+  font-family: $font__light;
+  font-weight:normal;
+  font-size: 2.25em;
+}
+
+h2 {
+  font-family: $font__light;
+
+  font-weight:normal;
+  font-size: 1.6875em;
+}
+
+h3 {
+  font-family: $font__light;
+  font-weight:normal;
+  font-size: 1.25em;
+}
+
+h4 {
+  font-family: $font__bold;
+  font-weight:normal;
+  font-size: .9375em;
+}
+
+h5 {
+  font-family: $font__bold;
+  font-weight:normal;
+  font-size: .75em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+article {
+
+  h1 {
+    font-family: $font__light;
+    font-weight:normal;
+    font-size: 2.625em;
+  }
+
+  h2 {
+    font-family: $font__light;
+    font-weight:normal;
+    font-size: 2.25em;
+  }
+
+  h3 {
+    font-family: $font__light;
+    font-weight:normal;
+    font-size: 1.6875em;
+  }
+
+  h4 {
+    font-family: $font__bold;
+    font-weight:normal;
+    font-size: 1.25em;
+  }
+
+  h5 {
+    font-family: $font__bold;
+    font-weight:normal;
+    font-size: 1.125em;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+}
+
+@media screen and (min-width: $bp__medium) {
+  h1 {
+    font-family: $font__light;
+    font-weight:normal;
+    font-size: 2.625em;
+  }
+
+  h2 {
+    font-family: $font__light;
+    font-weight:normal;
+    font-size: 1.6875em;
+  }
+
+  h3 {
+    font-family: $font__light;
+    font-weight:normal;
+    font-size: 1.25em;
+  }
+
+  h4 {
+    font-family: $font__bold;
+    font-weight:normal;
+    font-size: .9375em;
+  }
+
+  h5 {
+    font-family: $font__bold;
+    font-weight:normal;
+    font-size: .75em;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+.entry-title h1 {
+  font-family: $font__light;
+  font-weight:normal;
+  font-size: 3.75em;
+}
+  article {
+
+    h1 {
+      font-family: $font__light;
+      font-weight:normal;
+      font-size: 3.75em;
+    }
+
+    h2 {
+      font-family: $font__light;
+      font-weight:normal;
+      font-size: 2.625em;
+    }
+
+    h3 {
+      font-family: $font__light;
+      font-weight:normal;
+      font-size: 1.6875em;
+    }
+
+    h4 {
+      font-family: $font__bold;
+      font-weight:normal;
+      font-size: 1.25em;
+    }
+
+    h5 {
+      font-family: $font__bold;
+      font-weight:normal;
+      font-size: 1.125em;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+  }
+}

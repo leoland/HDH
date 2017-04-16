@@ -1,0 +1,59 @@
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"], .button {
+	float: none;
+	display: inline-block;
+	background-color: white;
+	text-transform: uppercase;
+	font-size: 15px;
+	font-family: $font__condensed;
+	font-weight: normal;
+	border: solid 2px;
+	line-height: 1;
+	padding: 10px 12px 8px;
+	margin-right: 7px;
+	transition: all .3s;
+	transition: border 0s;
+	&:hover, &.button-alt {
+		color: white;
+		border-color: $color__hd_orange;
+		background-color: $color__hd_orange;
+	}
+	&:hover{
+		cursor:pointer;
+	}
+}
+
+
+
+@-webkit-keyframes hvr-back-pulse {
+	50% {
+		background-color: $color__hd_orange;
+	}
+}
+@keyframes hvr-back-pulse {
+	50% {
+		background-color: $color__hd_orange;
+	}
+}
+.button-alt.button-alt.button-alt:hover{
+	-webkit-animation-name: hvr-back-pulse;
+	animation-name: hvr-back-pulse;
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+	-webkit-animation-delay: 0.5s;
+	animation-delay: 0.5s;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	border:none;
+	background-color: transparentize($color__hd_orange, .2);
+
+	padding: 12px 14px 10px;
+}
+
+
+
+

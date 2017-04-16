@@ -1,0 +1,148 @@
+$size__site-main: 100%;
+$size__site-sidebar: 25%;
+
+//Breakpoints
+$bp__medium: 800px;
+//$bp__medium: 567px;
+
+
+
+html, body {
+  width:100%;
+  margin:0;
+  padding:0;
+}
+.site-wrap{
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#page {
+
+  overflow-x: visible;
+  max-width: 1230px;
+  margin:0 auto;
+}
+/*
+diy grid system.
+*/
+
+/*
+Mobile Grid
+*/
+$full-width: 364/100;
+$col-width: (66/$full-width);
+$gut-width: (25/$full-width);
+/*
+Desktop Grid
+ */
+
+$full-width-big: 1224/100;
+$col-width-big: (108/$full-width-big);
+$gut-width-big: (45/$full-width-big);
+
+/*fluid mixins*/
+@mixin col-size($col-num) {
+  float: left;
+  padding-left: ($gut-width/2)*1%;
+  padding-right: ($gut-width/2)*1%;
+  width: ($col-num*($gut-width+$col-width))*1%;
+  margin: 0;
+
+  @media (min-width: $bp__medium) {
+    padding-left: ($gut-width-big/2)*1%;
+    padding-right: ($gut-width-big/2)*1%;
+    width: ($col-num*($gut-width-big+$col-width-big))*1%;
+  }
+}
+
+@mixin col-size-alt($col-num) {
+  /*
+  Uses Margins instead of padding. useful to prevent background images reaching beyond the gutters.
+   */
+  float: left;
+  margin-left: ($gut-width/2)*1%;
+  margin-right: ($gut-width/2)*1%;
+  width: ($col-num*($gut-width+$col-width)-$gut-width)*1%;
+  //sml ¯\_(ツ)_/¯
+  @media (min-width: $bp__medium) {
+    margin-left: ($gut-width-big/2)*1%;
+    margin-right: ($gut-width-big/2)*1%;
+    width: ($col-num*($gut-width-big+$col-width-big)-$gut-width-big)*1%;
+  }
+}
+
+@mixin col-size-gutterless($col-num) {
+  /*
+
+   */
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: ($col-num*($gut-width+$col-width))*1%;
+  //sml ¯\_(ツ)_/¯
+  @media (min-width: $bp__medium) {
+    width: ($col-num*($gut-width-big+$col-width-big))*1%;
+  }
+}
+
+@mixin col-size-fabric($col-num) {
+  /*
+  grid with smaller gutters for fabrics
+   */
+  float: left;
+  padding-left: ($gut-width/4)*1%;
+  padding-right: ($gut-width/4)*1%;
+  width: ($col-num*($gut-width+$col-width))*1%;
+  margin: 0;
+
+  @media (min-width: $bp__medium) {
+    padding-left: ($gut-width-big/4)*1%;
+    padding-right: ($gut-width-big/4)*1%;
+    width: ($col-num*($gut-width-big+$col-width-big))*1%;
+  }
+}
+
+@mixin fabrics-pad() {
+  float: left;
+  width: 100%;
+  padding-left: ($gut-width/4)*1%;
+  padding-right: ($gut-width/4)*1%;
+  @media (min-width: $bp__medium) {
+    padding-left: ($gut-width-big/4)*1%;
+    padding-right: ($gut-width-big/4)*1%;
+  }
+}
+
+/* dual grid padding*/
+@mixin grid-pad() {
+  float: left;
+  width: 100%;
+  padding-left: ($gut-width/2)*1%;
+  padding-right: ($gut-width/2)*1%;
+  @media (min-width: $bp__medium) {
+    padding-left: ($gut-width-big/2)*1%;
+    padding-right: ($gut-width-big/2)*1%;
+  }
+}
+
+@mixin grid-pad-alt() {
+  float: left;
+  width: (100-$gut-width)*1%;
+  padding:0;
+  margin-left: ($gut-width/2)*1%;
+  margin-right: ($gut-width/2)*1%;
+  @media (min-width: $bp__medium) {
+
+    width: (100-$gut-width-big)*1%;
+    margin-left: ($gut-width-big/2)*1%;
+    margin-right: ($gut-width-big/2)*1%;
+  }
+}
+
+@mixin push($num) {
+  margin-left: (($num*$col-width)+($num*$gut-width)-($gut-width*.5))*1%;
+  @media (min-width: $bp__medium) {
+    margin-left: (($num*$col-width-big)+($num*$gut-width-big)-($gut-width-big*.5))*1%;
+  }
+}

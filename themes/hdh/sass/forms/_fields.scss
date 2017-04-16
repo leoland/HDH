@@ -1,0 +1,62 @@
+form, .gform_wrapper.gform_wrapper.gform_wrapper form {
+
+  border-radius: 0;
+
+  border-top: solid 1px $color__hd_grey_25;
+  padding-top: 25px;
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="range"],
+  input[type="date"],
+  input[type="month"],
+  input[type="week"],
+  input[type="time"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="color"],
+  select,
+  textarea {
+    width: 100%;
+    font-family: $font__main;
+    font-size: 15px !important;
+    color: $color__hd_grey;
+    line-height: 1.2;
+    background-color: $color__hd_grey_12;
+    outline: none;
+    border: none;
+    padding: 10px !important;
+    border-radius: 0;
+    -webkit-appearance: none;
+    &:focus {
+      color: $color__text-input-focus;
+    }
+  }
+.gfield {
+  margin-top:0;
+  margin-bottom:35px;
+  padding-right:0;
+}
+label {
+font-family: $font__bold;
+  font-size: 15px;
+  font-weight:lighter;
+}
+
+  @media screen and (min-width: $bp__medium) {
+    label {
+      height:36px;
+      display: block;
+      float: left;
+      width: 25%;
+      padding-right: 10px;
+    }
+    input:not([type="submit"]), textarea {
+      width: 75%;
+    }
+  }
+}

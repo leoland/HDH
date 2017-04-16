@@ -1,0 +1,60 @@
+ul, ol {
+  margin: 0 0 1.5em 0;
+  padding-left: 1.5em;
+  line-height: 1.5;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  list-style-type: none;
+  position: relative;
+}
+
+ ul li:after {
+  content: '•';
+  position: absolute;
+  left: -1.5em;
+   top:0;
+  //width: 2em;
+  text-align: right;
+  color: $color__hd_orange;
+   font-size:15px;
+   line-height: 1.4;
+}
+
+ol {
+  list-style: none;
+}
+
+ol li {
+  list-style-type: none;
+  counter-increment: list;
+  position: relative;
+}
+
+ol li:after {
+  content: counter(list) ".";
+  position: absolute;
+  left: -1.5em;
+  top:0;
+  //width: 2em;
+  text-align: right;
+  color: $color__hd_orange;
+}
+
+li > ul,
+li > ol {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0 1.5em 1.5em;
+}

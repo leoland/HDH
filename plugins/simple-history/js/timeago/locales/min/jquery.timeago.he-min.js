@@ -1,0 +1,1 @@
+jQuery.timeago.settings.strings={prefixAgo:"לפני",prefixFromNow:"עוד",seconds:"פחות מדקה",minute:"דקה",minutes:"%d דקות",hour:"שעה",hours:function(n){return 2==n?"שעתיים":"%d שעות"},day:"יום",days:function(n){return 2==n?"יומיים":"%d ימים"},month:"חודש",months:function(n){return 2==n?"חודשיים":"%d חודשים"},year:"שנה",years:function(n){return 2==n?"שנתיים":"%d שנים"}};

@@ -1,0 +1,41 @@
+a {
+	color: $color__hd_grey;
+
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color__hd_orange;
+		.img-wrapper {
+			position: relative;
+			&:after{
+				content: '';
+				position: absolute;
+				width:100%;
+				bottom:0;
+				border-bottom: 4px solid $color__hd_orange;
+
+			}
+		}
+	}
+	&:focus {
+		outline: none;
+	}
+	&:hover,
+	&:active {
+		outline: 0;
+	}
+}
+
+li:hover .img-wrapper {
+
+	position: relative;
+	&:after{
+		content: '';
+		position: absolute;
+		width:100%;
+		bottom:0;
+		border-bottom: 4px solid $color__hd_orange;
+
+	}
+}
